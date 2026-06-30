@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇺🇸 7/4 가족 독립기념일 나들이</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #B22234 0%, #3C3B6E 55%, #B22234 100%);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★";
+    position: absolute;
+    top: 8px; left: 0; right: 0;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .hero::after {
+    content: "★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★  ★";
+    position: absolute;
+    bottom: 8px; left: 0; right: 0;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .flag-stripe {
+    height: 5px;
+    background: repeating-linear-gradient(90deg,
+      #B22234 0px, #B22234 33px,
+      #fff 33px, #fff 66px,
+      #3C3B6E 66px, #3C3B6E 99px);
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  /* Timeline */
+  .stop {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .stop-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .stop-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .stop-dot:hover { transform: scale(1.08); box-shadow: 0 2px 12px rgba(0,0,0,0.12); }
+  .stop-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 16px;
+    background: #ddd;
+    margin: 4px 0;
+  }
+  .stop-content {
+    flex: 1;
+    padding: 4px 0 12px;
+    cursor: pointer;
+  }
+  .stop-time {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+  }
+  .stop-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .stop-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .chevron {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-style: normal;
+    font-size: 11px;
+    color: #aaa;
+  }
+  .chevron.open { transform: rotate(180deg); }
+
+  /* Drive */
+  .drive {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+    opacity: 0.5;
+  }
+  .drive-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .drive-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 8px;
+    background: #ddd;
+  }
+  .drive-icon {
+    font-size: 16px;
+    line-height: 1;
+    padding: 4px 0;
+  }
+  .drive-content {
+    flex: 1;
+    padding: 4px 0;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+    align-self: center;
+  }
+
+  /* Detail panel */
+  .detail {
+    display: none;
+    margin: 0 0 12px 52px;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e8e8e8;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .detail.open { display: block; }
+  .detail-section { margin-bottom: 12px; }
+  .detail-section:last-child { margin-bottom: 0; }
+  .detail-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .detail-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .detail-text strong { color: #1a1a1a; font-weight: 600; }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .tag-green  { background: #e8f5e0; color: #2e6b10; }
+  .tag-blue   { background: #e2eef9; color: #1558a0; }
+  .tag-amber  { background: #fef3e0; color: #7a4b08; }
+  .tag-coral  { background: #fceae5; color: #8b3318; }
+  .tag-purple { background: #eeeeff; color: #3a3292; }
+  .tag-gray   { background: #f0f0f0; color: #555; }
+  .tag-pink   { background: #fceef5; color: #8b2256; }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .menu-card {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .menu-card-icon { font-size: 16px; display: block; margin-bottom: 3px; }
+  .menu-card-name { font-weight: 600; color: #1a1a1a; font-size: 12px; }
+  .menu-card-desc { color: #777; font-size: 11px; margin-top: 1px; }
+
+  .highlight-box {
+    background: #fffbf0;
+    border: 1px solid #f5e4a8;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #7a5c00;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .highlight-box strong { color: #5a4000; }
+
+  .store-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .store-item {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+  .store-item-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .store-item-icon { font-size: 16px; }
+  .store-item-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
+  .store-item-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .badge-pick { background: #fff3cd; color: #7a4b08; }
+  .badge-local { background: #d4edda; color: #155724; }
+  .badge-coffee { background: #d1ecf1; color: #0c5460; }
+  .store-item-desc { color: #666; font-size: 11px; }
+
+  .wait-notice {
+    background: #fff8e6;
+    border: 1px solid #f5d87a;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #7a5c00;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .plan-block {
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .plan-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .plan-a { background: #fff3cd; color: #7a4b00; }
+  .plan-b { background: #d4edda; color: #155724; }
+  .plan-c { background: #d1ecf1; color: #0c5460; }
+  .plan-d { background: #f0f0f0; color: #444; }
+  .plan-medal { font-size: 18px; }
+  .plan-label { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; opacity: 0.8; }
+  .plan-name { font-size: 14px; font-weight: 600; flex: 1; }
+  .plan-rating { font-size: 12px; }
+  .plan-body {
+    background: #fff;
+    padding: 12px 14px;
+  }
+  .plan-arrow {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    padding: 4px 0;
+    font-weight: 500;
+  }
+
+  .see-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .see-item {
+    font-size: 13px;
+    color: #444;
+    padding: 5px 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    line-height: 1.4;
+  }
+
+  .route-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .route-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+  }
+  .route-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: #3a6fd8;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .route-arrow {
+    text-align: center;
+    font-size: 13px;
+    color: #bbb;
+    padding: 2px 0;
+    margin-left: 10px;
+  }
+
+  .attraction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .attraction-card {
+    display: block;
+    background: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 9px 11px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .attraction-card:hover { background: #eef6ff; border-color: #b8d4f5; }
+  .ac-icon { font-size: 18px; display: block; margin-bottom: 3px; }
+  .ac-name { font-size: 12px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+  .ac-desc { font-size: 11px; color: #777; line-height: 1.4; }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a73e8;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid #c5d8f8;
+    background: #f0f6ff;
+    transition: background 0.15s;
+  }
+  .map-btn:hover { background: #dceeff; }
+
+  /* Dot colors */
+  .dot-green  { background: #e8f5e0; border-color: #2e6b10; }
+  .dot-coral  { background: #fceae5; border-color: #8b3318; }
+  .dot-blue   { background: #e2eef9; border-color: #1558a0; }
+  .dot-amber  { background: #fef3e0; border-color: #7a4b08; }
+  .dot-purple { background: #eeeeff; border-color: #3a3292; }
+  .dot-gray   { background: #f0f0f0; border-color: #bbb; }
+
+  .divider {
+    height: 1px;
+    background: #ececec;
+    margin: 10px 0;
+  }
+
+  .footer {
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e8e8e8;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.7;
+  }
+  .footer strong { color: #333; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">🇺🇸 JULY 4, 2025 · SATURDAY</div>
+  <h1>가족 독립기념일 나들이</h1>
+  <div class="hero-sub">Sunnyvale → Filoli → Alice's Restaurant<br>→ Half Moon Bay → Sizzler</div>
+</div>
+<div class="flag-stripe"></div>
+
+<div class="container">
+
+  <!-- 출발 -->
+  <div class="stop" onclick="toggle('home')">
+    <div class="stop-line">
+      <div class="stop-dot dot-gray">🏡</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">09:40</div>
+      <div class="stop-name">Sunnyvale 출발</div>
+      <div class="stop-desc">아침은 집에서 간단히 — 여유롭게 출발 <i class="chevron" id="chevron-home">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="home">
+    <div class="detail-section">
+      <div class="detail-label">출발 전 체크리스트</div>
+      <div class="detail-text">편한 신발 · 자외선 차단제 · 여분 재킷 (해안가 바람 대비) · 카메라 · 현금/카드</div>
+    </div>
+  </div>
+
+  <!-- 이동 1 -->
+  <div class="drive">
+    <div class="drive-line"><div class="drive-connector"></div><div class="drive-icon">🚗</div><div class="drive-connector"></div></div>
+    <div class="drive-content">약 40분 이동 · 10:20 Filoli 도착 (주차·입장 준비)</div>
+  </div>
+
+  <!-- Filoli -->
+  <div class="stop" onclick="toggle('filoli')">
+    <div class="stop-line">
+      <div class="stop-dot dot-green">🌸</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">10:30 – 13:00 (10:30~11:00 입장)</div>
+      <div class="stop-name">Filoli Historic House & Garden</div>
+      <div class="stop-desc">정원 산책 · 역사 저택 · 가족사진 <i class="chevron" id="chevron-filoli">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="filoli">
+
+    <div class="highlight-box" style="margin-bottom:12px">
+      🗺️ <strong>가시기 전에 한 번 보면 좋아요</strong><br>
+      <a href="https://filoli.org/map/" target="_blank" style="color:#7a5c00;font-weight:600">Filoli Visitor Map</a> 에서 Rose Garden · Walled Garden · Sunken Garden · Historic House 위치가 한눈에 들어와요.
+    </div>
+
+    <!-- 1. Rose Garden -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🌹</span>
+          <span class="store-item-name">Rose Garden</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          현재 어떤 장미가 피어있는지 계절별로 소개돼요. <strong>Betty White Rose</strong>, <strong>Fourth of July Rose</strong>, <strong>David Austin English Roses</strong> 등을 찾아보는 재미가 있어요.
+        </div>
+        <a class="map-btn" href="https://filoli.org" target="_blank">🌐 What's Blooming 보기</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 2. Walled Garden -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🧱</span>
+          <span class="store-item-name">Walled Garden</span>
+          <span class="store-item-badge badge-pick">⭐ 대표 공간</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          Filoli에서 <strong>가장 유명한 공간</strong>이에요.<br>
+          · 약 1에이커 규모<br>
+          · 10피트 높이 벽으로 둘러싸인 정원<br>
+          · 여러 개의 Garden Room으로 구성<br>
+          · 계절마다 꽃이 바뀜 (봄엔 벚꽃·크랩애플 유명)
+        </div>
+        <a class="map-btn" href="https://filoli.org/explore/garden/" target="_blank">🌐 Filoli Garden Guide</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 3. Sunken Garden -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">💧</span>
+          <span class="store-item-name">Sunken Garden</span>
+          <span class="store-item-badge badge-coffee">📸 포토 명소</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          Filoli에서 <strong>가장 먼저 보이는 메인 정원</strong>이에요.<br>
+          · 중앙의 긴 반사 연못 (Reflecting Pool)<br>
+          · 수련 (Water Lily)<br>
+          · 올리브나무 · 대칭 구조<br>
+          사진을 가장 많이 찍는 장소 중 하나예요.
+        </div>
+        <a class="map-btn" href="https://filoli.org/explore/garden/" target="_blank">🌐 Filoli Garden Guide</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 4. Historic House -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🏛️</span>
+          <span class="store-item-name">Historic House</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          <strong>1917년 완공</strong> · Georgian Revival 양식 · 약 54,000 sq ft · <strong>56개의 방</strong>으로 이루어진 대저택이에요.<br><br>
+          안에서 볼 수 있는 것: Ballroom · Library · Dining Room · Drawing Room · Reception Room
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://filoli.org/explore/house/" target="_blank">🌐 Filoli Historic House</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 5. Gift Shop -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🛍️</span>
+          <span class="store-item-name">Clock Tower Shop</span>
+          <span class="store-item-badge badge-local">기념품숍</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          Filoli의 대표 기념품숍이에요. Filoli에서 직접 재배한 식물과 한정 상품도 판매해요.
+        </div>
+        <div class="tags" style="margin-bottom:8px">
+          <span class="tag tag-green">🌹 정원 소품·원예 도구</span>
+          <span class="tag tag-pink">🌸 꽃씨·향초·비누·핸드크림</span>
+          <span class="tag tag-amber">☕ 머그컵·텀블러·티타월</span>
+          <span class="tag tag-blue">📚 정원·역사 책</span>
+          <span class="tag tag-purple">🎁 엽서·자석·기념품</span>
+        </div>
+        <div class="highlight-box">
+          🌷 정원을 좋아하는 분께 선물로 좋아요!
+        </div>
+        <a class="map-btn" href="https://filoli.org/visit/dining-shopping/" target="_blank">🌐 Shopping & Dining 안내</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 6. Quail Cafe -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">☕</span>
+          <span class="store-item-name">Quail Café</span>
+          <span class="store-item-badge badge-coffee">야외 좌석 추천</span>
+        </div>
+        <div class="detail-text" style="margin-bottom:8px">
+          정원을 둘러보다가 쉬기 좋은 카페예요. Epicurean Group이 운영하며 신선한 재료를 사용해요. <strong>🌳 야외 테이블</strong>에서 정원을 바라보며 커피·디저트 먹기 좋아요.
+        </div>
+        <div class="detail-label">대표 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🥪</span><div class="menu-card-name">Grab & Go Sandwich</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥗</span><div class="menu-card-name">샐러드</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥣</span><div class="menu-card-name">Soup</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥐</span><div class="menu-card-name">크루아상</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍰</span><div class="menu-card-name">디저트</div></div>
+          <div class="menu-card"><span class="menu-card-icon">☕</span><div class="menu-card-name">Latte·Cappuccino·Americano·Tea</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>운영시간:</strong> 10:00 AM – 4:30 PM<br>
+          <strong>주의:</strong> 예약 불가 (선착순) · <strong>현금 불가</strong>, 카드 결제만 가능
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://filoli.org/wp-content/uploads/2026/06/Quail-Cafe-Summer-Menu-2026-2.pdf" target="_blank">🍽️ Summer Menu (PDF)</a>
+          <a class="map-btn" href="https://filoli.org/visit/dining-shopping/" target="_blank">🌐 Quail Café 안내</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="detail-section">
+      <div class="detail-label">방문 정보</div>
+      <div class="detail-text">
+        <strong>주소:</strong> 86 Cañada Rd, Woodside, CA 94062<br>
+        <strong>입장료:</strong> 성인 $45 / 시니어 $40 (National Trust 회원 무료)<br>
+        <strong>운영시간:</strong> 10:00 AM – 5:00 PM
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a class="map-btn" href="https://filoli.org" target="_blank">🌿 Filoli 공식 사이트</a>
+      <a class="map-btn" href="https://maps.google.com/?q=Filoli+Historic+House+Garden+Woodside+CA" target="_blank">📍 Google Maps</a>
+    </div>
+  </div>
+
+  <!-- 이동 2 -->
+  <div class="drive">
+    <div class="drive-line"><div class="drive-connector"></div><div class="drive-icon">🚗</div><div class="drive-connector"></div></div>
+    <div class="drive-content">Filoli → Alice's Restaurant (또는 Plan B)</div>
+  </div>
+
+  <!-- Alice's -->
+  <div class="stop" onclick="toggle('alices')">
+    <div class="stop-line">
+      <div class="stop-dot dot-coral">🍔</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">13:15 – 14:15</div>
+      <div class="stop-name">Alice's Restaurant</div>
+      <div class="stop-desc">산속 클래식 다이너 · 점심 <i class="chevron" id="chevron-alices">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="alices">
+
+    <!-- 대기 안내 박스 -->
+    <div class="wait-notice">
+      ⏱️ <strong>7/4(토) 독립기념일</strong>은 1시~2시대 대기 30~60분 발생 가능 — Plan B를 미리 확인해 두세요!
+    </div>
+
+    <!-- Plan A -->
+    <div class="plan-block">
+      <div class="plan-header plan-a">
+        <span class="plan-medal">🥇</span>
+        <span class="plan-label">Plan A</span>
+        <span class="plan-name">Alice's Restaurant</span>
+        <span class="plan-rating">⭐ 4.6</span>
+      </div>
+      <div class="plan-body">
+        <div class="detail-section">
+          <div class="see-list" style="margin-bottom:10px">
+            <div class="see-item">🏍️ 미국 로드트립 감성 · 분위기 최고</div>
+            <div class="see-item">📍 Filoli에서 약 15분</div>
+            <div class="see-item">⏱️ 대기 30분 이하면 그대로 식사 추천!</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🥩</span><div class="menu-card-name">Steak & Eggs</div><div class="menu-card-desc">클래식 올데이 메뉴</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍔</span><div class="menu-card-name">Cheeseburger</div><div class="menu-card-desc">두툼한 수제 버거</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍖</span><div class="menu-card-name">BBQ Ribs</div><div class="menu-card-desc">12시간 훈제 · $24.95~</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥪</span><div class="menu-card-name">Turkey Melt</div><div class="menu-card-desc">베이컨·아보카도·잭치즈</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥧</span><div class="menu-card-name">홈메이드 파이</div><div class="menu-card-desc">가족이 나눠 먹기 딱!</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥑</span><div class="menu-card-name">Avocado Omelet</div><div class="menu-card-desc">아보카도·베이컨·스위스치즈</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 17288 Skyline Blvd, Woodside, CA 94062<br>
+          <strong>전화:</strong> (650) 851-0303 · <strong>예약:</strong> Walk-in only
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://alicesrestaurant.com/woodside-alice-s-restaurant-food-menu" target="_blank">🍽️ 푸드 메뉴</a>
+          <a class="map-btn" href="https://alicesrestaurant.com/woodside-alice-s-restaurant-drink-menu" target="_blank">🍹 드링크 메뉴</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Alice%27s+Restaurant+17288+Skyline+Blvd+Woodside+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-arrow">대기 40분 이상이면 ↓</div>
+
+    <!-- Plan B -->
+    <div class="plan-block">
+      <div class="plan-header plan-b">
+        <span class="plan-medal">🥈</span>
+        <span class="plan-label">Plan B</span>
+        <span class="plan-name">Buck's Restaurant</span>
+        <span class="plan-rating">⭐ 4.4</span>
+      </div>
+      <div class="plan-body">
+        <div class="highlight-box" style="margin-bottom:10px">
+          💡 <strong>가장 추천!</strong> Alice's 못지않은 만족도 — 더 편안하고 여유로운 분위기!
+        </div>
+        <div class="detail-section">
+          <div class="see-list" style="margin-bottom:10px">
+            <div class="see-item">📍 Filoli에서 약 10분 거리</div>
+            <div class="see-item">🍽️ Alice's보다 메뉴가 훨씬 다양</div>
+            <div class="see-item">🪑 실내가 넓어서 회전도 빠른 편</div>
+            <div class="see-item">💼 실리콘밸리 창업가·투자자들의 성지 (Hotmail·Tesla·PayPal 탄생지)</div>
+            <div class="see-item">🐟 입구 앞 20피트 나무 물고기 조형물 — 사진 명소!</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🍳</span><div class="menu-card-name">Eggs Benedict</div><div class="menu-card-desc">브런치 시그니처</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍔</span><div class="menu-card-name">Double Smash Burger</div><div class="menu-card-desc">SF 베스트 버거 중 하나</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥗</span><div class="menu-card-name">Crispy Chicken Salad</div><div class="menu-card-desc">캐슈·시트러스·나파 캐비지</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥞</span><div class="menu-card-name">Pancakes</div><div class="menu-card-desc">버터밀크·블루베리·라즈베리</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🐟</span><div class="menu-card-name">Fish & Chips</div><div class="menu-card-desc">바삭한 영국식 피쉬</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍲</span><div class="menu-card-name">French Onion Soup</div><div class="menu-card-desc">리뷰어 극찬 · 진한 국물</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 3062 Woodside Rd, Woodside, CA 94062<br>
+          <strong>전화:</strong> (650) 851-8010<br>
+          <strong>영업:</strong> 8:00 AM – 9:30 PM (토)
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://www.buckswoodside.com" target="_blank">🌐 공식 홈페이지</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Buck%27s+Restaurant+3062+Woodside+Rd+Woodside+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-arrow">여기도 사람이 많으면 ↓</div>
+
+    <!-- Plan C -->
+    <div class="plan-block">
+      <div class="plan-header plan-c">
+        <span class="plan-medal">🥉</span>
+        <span class="plan-label">Plan C</span>
+        <span class="plan-name">The Village Bakery & Cafe</span>
+        <span class="plan-rating">⭐ 4.3</span>
+      </div>
+      <div class="plan-body">
+        <div class="detail-section">
+          <div class="see-list" style="margin-bottom:10px">
+            <div class="see-item">😌 조용하고 여유로운 분위기</div>
+            <div class="see-item">😌 조용하고 여유로운 분위기를 좋아하면 딱</div>
+            <div class="see-item">🥪 점심을 가볍게 먹기 딱 좋음</div>
+            <div class="see-item">📅 예약 가능 (토요일 브런치 9AM~2:30PM)</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🥚</span><div class="menu-card-name">Shakshouka</div><div class="menu-card-desc">모로칸 스타일 포치드 에그</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥗</span><div class="menu-card-name">Caesar Salad</div><div class="menu-card-desc">신선한 재료 · 인기 메뉴</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥪</span><div class="menu-card-name">샌드위치</div><div class="menu-card-desc">갓 구운 빵으로 제조</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍰</span><div class="menu-card-name">베이커리 디저트</div><div class="menu-card-desc">케이크·파이·페이스트리</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥣</span><div class="menu-card-name">수프</div><div class="menu-card-desc">계절 수프 · 따뜻하게</div></div>
+          <div class="menu-card"><span class="menu-card-icon">☕</span><div class="menu-card-name">커피 / 라떼</div><div class="menu-card-desc">신선한 원두 사용</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 3052 Woodside Rd, Woodside, CA 94062<br>
+          <strong>전화:</strong> (650) 851-5555<br>
+          <strong>영업:</strong> 토 브런치 9:00 AM – 2:30 PM
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://www.tvbwoodside.com/menus" target="_blank">🍽️ 메뉴 보기</a>
+          <a class="map-btn" href="https://maps.google.com/?q=The+Village+Bakery+3052+Woodside+Rd+Woodside+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plan D -->
+    <div class="plan-block" style="margin-bottom:0">
+      <div class="plan-header plan-d">
+        <span class="plan-medal">⭐</span>
+        <span class="plan-label">Plan D</span>
+        <span class="plan-name">Canyon Inn</span>
+        <span class="plan-rating">⭐ 4.6</span>
+      </div>
+      <div class="plan-body">
+        <div class="detail-section">
+          <div class="see-list" style="margin-bottom:10px">
+            <div class="see-item">🏈 49ers 레전드들의 단골 스포츠 바 (1973년 창업)</div>
+            <div class="see-item">🍔 Alice's보다 덜 붐비는 편</div>
+            <div class="see-item">👨‍👩‍👧 가족 친화적 · 야외 좌석 있음</div>
+            <div class="see-item">⚠️ Redwood City 위치 — Woodside에서 약 15분</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🍔</span><div class="menu-card-name">Grand Canyon Burger</div><div class="menu-card-desc">시그니처 버거</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍖</span><div class="menu-card-name">BBQ</div><div class="menu-card-desc">두툼한 BBQ 메뉴</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🐟</span><div class="menu-card-name">Fish & Chips</div><div class="menu-card-desc">바삭바삭</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥪</span><div class="menu-card-name">샌드위치</div><div class="menu-card-desc">다양한 종류</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 587 Canyon Rd, Redwood City, CA 94062<br>
+          <strong>전화:</strong> (650) 369-1646<br>
+          <strong>영업:</strong> 11:00 AM – 9:00 PM (토)
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://www.canyoninnrwc.com/menu" target="_blank">🍽️ 메뉴 보기</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Canyon+Inn+587+Canyon+Rd+Redwood+City+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 이동 3 -->
+  <div class="drive">
+    <div class="drive-line"><div class="drive-connector"></div><div class="drive-icon">🚗</div><div class="drive-connector"></div></div>
+    <div class="drive-content">14:15~14:45 · Half Moon Bay 이동</div>
+  </div>
+
+  <!-- Pillar Point -->
+  <div class="stop" onclick="toggle('pillar')">
+    <div class="stop-line">
+      <div class="stop-dot dot-blue">⚓</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">14:45 – 15:35</div>
+      <div class="stop-name">Pillar Point Harbor</div>
+      <div class="stop-desc">항구 구경 · 갈매기 · 벤치 휴식 <i class="chevron" id="chevron-pillar">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="pillar">
+    <div class="detail-section">
+      <div class="detail-label">어떤 곳인가요?</div>
+      <div class="detail-text">
+        Half Moon Bay의 대표 어항으로, 단순한 항구가 아닌 <strong>살아있는 어촌의 일상</strong>을 가까이서 볼 수 있는 곳이에요. 여유롭게 둘러보기 좋은 분위기입니다.
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">이곳에서 볼 수 있어요</div>
+      <div class="see-list">
+        <div class="see-item">🎣 상업용 어선 출항하는 모습</div>
+        <div class="see-item">🦀 게잡이 배</div>
+        <div class="see-item">🦭 바다사자·물개 (운이 좋으면!)</div>
+        <div class="see-item">🐦 갈매기</div>
+        <div class="see-item">🌊 잔잔한 항구 바다 풍경</div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">추천 동선 (약 40~50분)</div>
+      <div class="route-steps">
+        <div class="route-step"><span class="route-num">①</span><div><strong>주차</strong> — 항구 인근 무료 공간 이용</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">②</span><div><strong>Johnson Pier</strong>까지 천천히 걷기 — 가장 유명한 부두, 어선 구경 포인트</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">③</span><div><strong>항구 산책</strong> — 어선·갈매기 감상</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">④</span><div><strong>벤치에서 휴식</strong> — 많이 걷지 않아도 충분!</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">⑤</span><div><strong>가족사진</strong> — 어선 배경, 항구 배경</div></div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">정보</div>
+      <div class="detail-text">
+        <strong>주소:</strong> Capistrano Rd, Princeton-by-the-Sea, CA 94018<br>
+        <strong>주차:</strong> 항구 인근 무료<br>
+        <strong>팁:</strong> 많이 걷지 않아도 OK · 화장실 항구 근처 있음
+      </div>
+    </div>
+    <a class="map-btn" href="https://maps.google.com/?q=Pillar+Point+Harbor+Half+Moon+Bay+CA" target="_blank">📍 Google Maps로 보기</a>
+  </div>
+
+  <!-- 이동 4 -->
+  <div class="drive">
+    <div class="drive-line"><div class="drive-connector"></div><div class="drive-icon">🚗</div><div class="drive-connector"></div></div>
+    <div class="drive-content">약 10분 이동 · Harbor → Francis Beach</div>
+  </div>
+
+  <!-- Beach -->
+  <div class="stop" onclick="toggle('beach')">
+    <div class="stop-line">
+      <div class="stop-dot dot-blue">🌊</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">15:45 – 16:45</div>
+      <div class="stop-name">Half Moon Bay State Beach</div>
+      <div class="stop-desc">해변 산책 · 가족사진 · 바다 감상 <i class="chevron" id="chevron-beach">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="beach">
+    <div class="detail-section">
+      <div class="detail-label">어떤 곳인가요?</div>
+      <div class="detail-text">
+        Half Moon Bay State Beach는 여러 해변으로 이루어진 긴 해안선이에요. 그중 <strong>Francis Beach</strong>가 처음 방문하는 분들께 가장 추천되는 구역입니다.
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Francis Beach를 추천하는 이유</div>
+      <div class="see-list">
+        <div class="see-item">✅ 접근성이 가장 좋음</div>
+        <div class="see-item">✅ 주차장이 넓고 편리</div>
+        <div class="see-item">✅ 화장실이 가까움</div>
+        <div class="see-item">✅ Coastal Trail이 평평해서 걷기 편함</div>
+        <div class="see-item">📸 사진이 정말 잘 나오는 뷰 포인트</div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">추천 동선 (약 1시간)</div>
+      <div class="route-steps">
+        <div class="route-step"><span class="route-num">①</span><div><strong>주차</strong> — $12/day (캘리포니아 주립공원)</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">②</span><div><strong>해변으로 이동</strong></div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">③</span><div><strong>Coastal Trail 조금 걷기</strong> — 평평해서 걷기 편함</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">④</span><div><strong>백사장에서 가족사진</strong> — 끝없이 펼쳐진 태평양, 넓은 백사장, 파도</div></div>
+        <div class="route-arrow">↓</div>
+        <div class="route-step"><span class="route-num">⑤</span><div><strong>벤치에서 바다 감상</strong> — 여유롭게 휴식</div></div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">⚓ Harbor 먼저, 🌊 Beach 나중인 이유</div>
+      <div class="highlight-box">
+        항구의 <strong>잔잔한 바다</strong> → 해변의 <strong>넓은 태평양</strong> 순서로 가면 풍경이 점점 시원하게 열리면서 여행 만족도가 높아져요. 반대로 해변부터 가면 항구가 조금 심심하게 느껴질 수 있어요.
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">정보</div>
+      <div class="detail-text">
+        <strong>주소 (Francis Beach):</strong> 95 Kelly Ave, Half Moon Bay, CA 94019<br>
+        <strong>주차비:</strong> $12/day<br>
+        <strong>날씨 주의:</strong> Half Moon Bay는 항상 서늘 — 겉옷 필수 🧥<br>
+        <strong>팁:</strong> 독립기념일이라 혼잡할 수 있으니 여유롭게
+      </div>
+    </div>
+    <a class="map-btn" href="https://maps.google.com/?q=Francis+Beach+Half+Moon+Bay+State+Beach+CA" target="_blank">📍 Google Maps로 보기</a>
+  </div>
+
+  <!-- 카페 -->
+  <div class="stop" onclick="toggle('cafe')">
+    <div class="stop-line">
+      <div class="stop-dot dot-amber">☕</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">16:45 – 17:15</div>
+      <div class="stop-name">카페 & 스토어</div>
+      <div class="stop-desc">바다 바라보며 달콤한 휴식 · 아래 3곳 중 선택 <i class="chevron" id="chevron-cafe">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="cafe">
+
+    <!-- 1. HMB Coffee Co — TOP PICK -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">☕</span>
+          <span class="store-item-name">Half Moon Bay Coffee Company</span>
+          <span class="store-item-badge badge-pick">⭐⭐⭐⭐⭐ 가장 추천</span>
+        </div>
+        <div class="detail-section" style="margin-bottom:8px">
+          <div class="detail-label">추천 이유</div>
+          <div class="see-list">
+            <div class="see-item">👨‍👩‍👧‍👦 가족들이 가장 많이 찾는 카페</div>
+            <div class="see-item">🍰 디저트 종류가 다양</div>
+            <div class="see-item">🪑 실내 좌석이 넓음</div>
+            <div class="see-item">☕ 커피뿐 아니라 빵과 케이크도 맛있음</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">☕</span><div class="menu-card-name">Latte</div><div class="menu-card-desc">부드럽고 진한 에스프레소</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥤</span><div class="menu-card-name">Mocha</div><div class="menu-card-desc">달콤한 초콜릿 라떼</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍰</span><div class="menu-card-name">Cheesecake</div><div class="menu-card-desc">진한 크림치즈 디저트</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥧</span><div class="menu-card-name">Mini Pie</div><div class="menu-card-desc">시그니처 · 커피와 찰떡</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍪</span><div class="menu-card-name">Cookies</div><div class="menu-card-desc">홈메이드 쿠키</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥐</span><div class="menu-card-name">Croissant</div><div class="menu-card-desc">버터 풍미 가득</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 20 Stone Pine Rd, Half Moon Bay<br>
+          <strong>영업:</strong> 6:30 AM – 4:00 PM (매일)
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://www.hmbcoffeeco.com" target="_blank">🌐 홈페이지 / 메뉴 보기</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Half+Moon+Bay+Coffee+Company+20+Stone+Pine+Rd+Half+Moon+Bay+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 2. Moonside -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🥐</span>
+          <span class="store-item-name">Moonside Bakery & Café</span>
+          <span class="store-item-badge badge-local">유럽풍 베이커리</span>
+        </div>
+        <div class="detail-section" style="margin-bottom:8px">
+          <div class="detail-label">추천 이유</div>
+          <div class="see-list">
+            <div class="see-item">🇫🇷 유럽풍 베이커리 분위기</div>
+            <div class="see-item">😌 편안하고 조용한 분위기를 좋아하는 분께 추천</div>
+            <div class="see-item">🍰 디저트가 정말 맛있음</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">🥐</span><div class="menu-card-name">Almond Croissant</div><div class="menu-card-desc">고소한 아몬드 크림</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🧇</span><div class="menu-card-name">Danish</div><div class="menu-card-desc">바삭한 유럽식 페이스트리</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍰</span><div class="menu-card-name">Fruit Tart</div><div class="menu-card-desc">인증샷 필수 · 아몬드크림+커스터드</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍮</span><div class="menu-card-name">Cheesecake</div><div class="menu-card-desc">헝가리안 스타일</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥧</span><div class="menu-card-name">Apple Pie</div><div class="menu-card-desc">따뜻한 홈메이드 파이</div></div>
+          <div class="menu-card"><span class="menu-card-icon">☕</span><div class="menu-card-name">Cappuccino / Latte</div><div class="menu-card-desc">각종 밀크 옵션 제공</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>주소:</strong> 604 Main St, Half Moon Bay<br>
+          <strong>영업:</strong> 7:00 AM – 4:00 PM (토) · (650) 726-9070
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://moonsidebakery.com" target="_blank">🌐 홈페이지 / 메뉴 보기</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Moonside+Bakery+Cafe+604+Main+St+Half+Moon+Bay+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 3. Cafe Society -->
+    <div class="detail-section">
+      <div class="store-item">
+        <div class="store-item-header">
+          <span class="store-item-icon">🎷</span>
+          <span class="store-item-name">Cafe Society</span>
+          <span class="store-item-badge badge-coffee">조용한 분위기</span>
+        </div>
+        <div class="detail-section" style="margin-bottom:8px">
+          <div class="detail-label">추천 이유</div>
+          <div class="see-list">
+            <div class="see-item">🎵 재즈 음악이 흐르는 조용한 분위기</div>
+            <div class="see-item">🏘️ 현지 느낌이 강한 로컬 카페</div>
+            <div class="see-item">😌 여유롭게 쉬고 싶을 때 딱</div>
+          </div>
+        </div>
+        <div class="detail-label">추천 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-card"><span class="menu-card-icon">☕</span><div class="menu-card-name">Espresso</div><div class="menu-card-desc">진하고 깔끔한 에스프레소</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🍵</span><div class="menu-card-name">Cappuccino</div><div class="menu-card-desc">클래식 이탈리안 스타일</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🧊</span><div class="menu-card-name">Iced Latte</div><div class="menu-card-desc">시원하게 즐기기</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥪</span><div class="menu-card-name">Sandwich</div><div class="menu-card-desc">간단한 식사</div></div>
+          <div class="menu-card"><span class="menu-card-icon">🥐</span><div class="menu-card-name">Pastry</div><div class="menu-card-desc">커피와 함께</div></div>
+        </div>
+        <div class="detail-text" style="margin:10px 0 8px">
+          <strong>전화:</strong> (650) 713-0800
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="map-btn" href="https://www.cafesocietyhmb.com" target="_blank">🌐 홈페이지 / 메뉴 보기</a>
+          <a class="map-btn" href="https://maps.google.com/?q=Cafe+Society+Half+Moon+Bay+CA" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 이동 5 -->
+  <div class="drive">
+    <div class="drive-line"><div class="drive-connector"></div><div class="drive-icon">🚗</div><div class="drive-connector"></div></div>
+    <div class="drive-content">17:15 출발 · 약 50~60분 · Half Moon Bay → Sunnyvale</div>
+  </div>
+
+  <!-- Sizzler -->
+  <div class="stop" onclick="toggle('sizzler')">
+    <div class="stop-line">
+      <div class="stop-dot dot-purple">🥩</div>
+      <div class="stop-connector"></div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">18:15 – 18:30 도착 · 저녁 식사</div>
+      <div class="stop-name">Sizzler 저녁</div>
+      <div class="stop-desc">스테이크 + 샐러드바로 하루 마무리 <i class="chevron" id="chevron-sizzler">▾</i></div>
+    </div>
+  </div>
+  <div class="detail" id="sizzler">
+    <div class="detail-section">
+      <div class="detail-label">정보</div>
+      <div class="detail-text">
+        <strong>주소:</strong> 785 E El Camino Real, Sunnyvale, CA 94087<br>
+        <strong>독립기념일 팁:</strong> 혼잡할 수 있으니 미리 전화 확인 권장<br>
+        <strong>추천:</strong> Unlimited Salad Bar + Steak combo
+      </div>
+    </div>
+    <a class="map-btn" href="https://maps.google.com/?q=Sizzler+785+E+El+Camino+Real+Sunnyvale+CA" target="_blank">📍 Google Maps로 보기</a>
+  </div>
+
+  <!-- 귀가 -->
+  <div class="stop">
+    <div class="stop-line">
+      <div class="stop-dot dot-gray">🏡</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">19:30 – 19:50</div>
+      <div class="stop-name">귀가 🎆</div>
+      <div class="stop-desc">즐거운 하루 마무리 — 불꽃놀이는 TV로!</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>📌 각 장소를 탭하면 상세 정보와 Google Maps 링크가 열려요</strong><br>
+    독립기념일 당일은 혼잡할 수 있으니 여유롭게 일정 조정 OK 😊
+  </div>
+
+</div>
+
+<script>
+function toggle(id) {
+  const panel = document.getElementById(id);
+  const chevron = document.getElementById('chevron-' + id);
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  if (chevron) chevron.classList.toggle('open', isOpen);
+}
+</script>
+</body>
+</html>
